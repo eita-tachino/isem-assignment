@@ -6,6 +6,13 @@ const receiver = new HTTPReceiver({
   processBeforeResponse: true,
   endpoints: "/api/slack/events",
   logLevel: LogLevel.DEBUG,
+  customPropertiesExtractor: (req) => {
+    return {
+      headers: req.headers,
+      foo: "barrr",
+      origin: true,
+    };
+  },
 });
 
 bolt(receiver);
