@@ -1,4 +1,4 @@
-import { HTTPReceiver, LogLevel } from "@slack/bolt";
+import { ExpressReceiver, HTTPReceiver, LogLevel } from "@slack/bolt";
 import bolt from "../../../lib/bolt";
 
 const receiver = new HTTPReceiver({
@@ -9,11 +9,21 @@ const receiver = new HTTPReceiver({
   customPropertiesExtractor: (req) => {
     return {
       headers: req.headers,
-      foo: "barrr",
-      origin: true,
+      foo: "bar",
     };
   },
 });
+
+// const receiver = new ExpressReceiver({
+//   signingSecret: process.env.SLACK_SIGNING_SECRET,
+//   customPropertiesExtractor: (req) => {
+//     return {
+//       headers: req.headers,
+//       foo: "barrr",
+//       origin: true,
+//     };
+//   },
+// });
 
 bolt(receiver);
 
